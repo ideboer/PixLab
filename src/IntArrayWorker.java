@@ -113,9 +113,9 @@ public class IntArrayWorker {
 	public int getColTotal(int col) {
 		int total = 0;
 		for (int[] rowArray : matrix) {
-			for (int item : rowArray) {
-				if (item == col) {
-					total += item;
+			for (int i = 0; i < matrix[0].length; i ++) {
+				if (i == col) {
+					total += rowArray[i];
 				}
 			}
 		}
