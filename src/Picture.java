@@ -341,6 +341,35 @@ public class Picture extends SimplePicture {
 		}
 	}
 
+	public void copy(Picture fromPic, int toStartRow, int toStartCol, int fromStartRow, int fromEndRow, int fromStartCol, int fromEndCol) {
+		Pixel fromPixel = null;
+		Pixel toPixel = null;
+		Pixel[][] toPixels = this.getPixels2D();
+		Pixel[][] fromPixels = fromPic.getPixels2D();
+		for (int fromRow = fromStartRow, toRow = toStartRow; fromRow <= fromEndRow; fromRow++, toRow++) {
+			for (int fromCol = fromStartCol, toCol = toStartCol; fromCol <= fromEndCol; fromCol++, toCol++) {
+				fromPixel = fromPixels[fromRow][fromCol];
+				toPixel = toPixels[toRow][toCol];
+				toPixel.setColor(fromPixel.getColor());
+			}
+
+		}
+	}
+
+	public void myCollage() {
+		Picture caterpillar = new Picture("caterpillar.jpg");
+		Picture flower1 = new Picture("flower1.jpg");
+		Picture flower2 = new Picture("flower2.jpg");
+		caterpillar.mirrorHorizontalBotToTop();
+		caterpillar.grayscale();
+		flower1.negate();
+		flower2.keepOnlyBlue();
+		this.copy(caterpillar, 60, 90, 50, 100, 75, 150);
+		this.copy(flower1, 5, 5, 30, 50, 5, 70);
+		this.copy(flower2, 40, 60, 70, 90, 50, 70);
+
+	}
+
 	/*
 	 * Main method for testing - each class in Java can have a main method
 	 */
