@@ -364,9 +364,9 @@ public class Picture extends SimplePicture {
 		caterpillar.grayscale();
 		flower1.negate();
 		flower2.keepOnlyBlue();
-		this.copy(caterpillar, 60, 90, 50, 100, 75, 150);
-		this.copy(flower1, 5, 5, 30, 50, 5, 70);
-		this.copy(flower2, 40, 60, 70, 90, 50, 70);
+		this.copy(caterpillar, 0, 0, 0, 100, 0, 100);
+		this.copy(flower1, 100, 100, 30, 90, 30, 90);
+		this.copy(flower2, 150, 150, 70, 90, 70, 90);
 
 	}
 
