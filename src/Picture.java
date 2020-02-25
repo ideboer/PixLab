@@ -229,6 +229,26 @@ public class Picture extends SimplePicture {
 		}
 	}
 
+	public void keepOnlyRed() {
+		Pixel[][] pixels = this.getPixels2D();
+		for (Pixel[] rowArray : pixels) {
+			for (Pixel pixelObj : rowArray) {
+				pixelObj.setBlue(0);
+				pixelObj.setGreen(0);
+			}
+		}
+	}
+
+	public void keepOnlyGreen() {
+		Pixel[][] pixels = this.getPixels2D();
+		for (Pixel[] rowArray : pixels) {
+			for (Pixel pixelObj : rowArray) {
+				pixelObj.setRed(0);
+				pixelObj.setBlue(0);
+			}
+		}
+	}
+
 	public void negate() {
 		Pixel[][] pixels = this.getPixels2D();
 		for (Pixel[] rowArray : pixels) {
@@ -385,6 +405,42 @@ public class Picture extends SimplePicture {
 		this.copy(flower2, 150, 150, 70, 90, 70, 90);
 
 	}
+
+	public void edgeDetection2(int edgeDist) {
+		Pixel leftPixel = null;
+		Pixel rightPixel = null;
+		Pixel topPixel = null;
+		Pixel botPixel = null;
+		Pixel[][] pixels = this.getPixels2D();
+		Pixel[][] original1 = this.getPixels2D();
+		Pixel[][] original2 = this.getPixels2D();
+		this.keepOnlyBlue();
+		for (int row = 0; row < pixels.length; row++) {
+			for (int col = 0; col < pixels[0].length - 3; col++) {
+				leftPixel = pixels[row][col];
+				rightPixel = pixels[row][col + 3];
+				if (leftPixel.getBlue() - rightPixel.getBlue() > edgeDist) {
+					leftPixel.setColor(Color.BLACK);
+				}
+				else {
+					leftPixel.setColor(Color.WHITE);
+				}
+			}
+		}
+		for (int row = 0; row < pixels.length - 3; row++) {
+			for (int col = 0; col < pixels[0].length; col++) {
+				topPixel = pixels[row][col];
+				botPixel = pixels[row + 3][col];
+				if (topPixel.getBlue() - botPixel.getBlue() > edgeDist) {
+					topPixel.setColor(Color.BLACK);
+				}
+				else {
+					topPixel.setColor(Color.WHITE);
+				}
+			}
+		}
+
+	} 
 
 	/*
 	 * Main method for testing - each class in Java can have a main method
